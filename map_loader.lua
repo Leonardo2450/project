@@ -72,6 +72,12 @@ function map_loader.drawMap()
   for i,v in pairs(map) do
     for l,k in pairs(v) do
       local img, quad = returnTile(k.spr)
+      if k.owo then
+        love.graphics.setColor(1,0,0)
+      else
+        love.graphics.setColor(1,1,1)
+      end
+      
       love.graphics.draw(img,quad,0+((k.size*2)*l),0+((k.size*2)*i),0,2,2)
       love.graphics.rectangle("line",0+((k.size*2)*l),0+((k.size*2)*i),k.size*2,k.size*2)
       love.graphics.print(l.."|"..i,0+((k.size*2)*l),0+((k.size*2)*i))

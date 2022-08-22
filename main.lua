@@ -1,4 +1,5 @@
 local map_manager = require("map_loader")
+local debug = require("debug_menu")
 
 love.graphics.setDefaultFilter("nearest","nearest")
 
@@ -16,5 +17,14 @@ end
 function love.draw()
   love.graphics.setBackgroundColor(0,0,1)
   map_manager.drawMap()
+  debug.draw()
   --map_manager.TileSets()
+end
+
+function love.keypressed(key)
+  if key == "escape" then
+    debug.enable()
+  else
+    debug.disable()
+  end
 end
