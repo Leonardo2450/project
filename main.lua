@@ -1,7 +1,12 @@
+love.graphics.setDefaultFilter("nearest","nearest")
 local map_manager = require("map_loader")
 local debug = require("debug_menu")
+local player = require("player")
+local controls = require("controls")
+local rs = require("resolution_solution")
 
-love.graphics.setDefaultFilter("nearest","nearest")
+rs.setGame(800, 600)
+rs.scaleMode = 1
 
 function love.load()
   map_manager.loadTileSet("test.png",16, "PRUEB")
@@ -11,20 +16,15 @@ function love.load()
 end
 
 function love.update()
-  
+  rs.update()
 end
 
 function love.draw()
+  rs.start()
   love.graphics.setBackgroundColor(0,0,1)
   map_manager.drawMap()
   debug.draw()
+  player:draw()
+  rs.stop()
   --map_manager.TileSets()
-end
-
-function love.keypressed(key)
-  if key == "escape" then
-    debug.enable()
-  else
-    debug.disable()
-  end
 end

@@ -1,12 +1,18 @@
 local debug = {}
 
 local debugMode = false
-local seleccion = 0
+local seleccion = {0,0}
 local menus = {
-  {"","","",""},
-  {"","","",""},
-  {"","","",""}
+  {"DEBUG MENU - MAIN MENU","MAP MENU","CAMERA MENU"},
+  {"DEBUG MENU - ENTITIES MENU","","",""},
+  {"DEBUG MENU - CAMERA MENU","","",""}
 }
+
+function debug.message(text)
+  if debug.isEnable()then
+    print("[DEBUG]"..text)
+  end
+end
 
 function debug.enable()
   debugMode = true
