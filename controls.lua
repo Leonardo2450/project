@@ -53,8 +53,15 @@ end
 
 function love.keypressed(key)
   debug.message("Tecla presiona: "..key)
-  player:movement(key)
-  if key == controls.key_espacio then
+  
+  if not debug.isEnable() then
+    player:movement(key)
+  end
+  if key == "up" then
+    debug.nextSelection("+")
+  elseif key == "down" then
+    debug.nextSelection("-")
+  elseif key == controls.key_espacio then
     controls:funcion_key_espacio()
   elseif key == "f1" then
     if debug.isEnable() then

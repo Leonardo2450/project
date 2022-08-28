@@ -1,3 +1,6 @@
+local camera = require("camera")
+local debug = require("debug_menu")
+
 local map_loader = {}
 
 local tilesets = {}
@@ -79,8 +82,10 @@ function map_loader.drawMap()
       end
       
       love.graphics.draw(img,quad,0+((k.size*2)*l),0+((k.size*2)*i),0,2,2)
-      love.graphics.rectangle("line",0+((k.size*2)*l),0+((k.size*2)*i),k.size*2,k.size*2)
-      love.graphics.print(l.."|"..i,0+((k.size*2)*l),0+((k.size*2)*i))
+      if debug.MapTilesIsEnable() then
+        love.graphics.rectangle("line",0+((k.size*2)*l),0+((k.size*2)*i),k.size*2,k.size*2)
+        love.graphics.print(l.."|"..i,0+((k.size*2)*l),0+((k.size*2)*i))
+      end
     end
   end
 end

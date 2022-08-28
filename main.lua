@@ -5,6 +5,7 @@ local player = require("player")
 local controls = require("controls")
 local rs = require("resolution_solution")
 
+--Resolution solution setup
 rs.setGame(800, 600)
 rs.scaleMode = 1
 
@@ -15,7 +16,7 @@ function love.load()
   map_manager.loadMap("XD")
 end
 
-function love.update()
+function love.update(dt)
   rs.update()
 end
 

@@ -1,0 +1,3 @@
+local camera = {}
+
+return camera

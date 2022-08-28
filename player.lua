@@ -10,6 +10,11 @@ function player:draw()
   love.graphics.draw(self.spr,self.x,self.y,0,2,2)
 end
 
+function player:teleport(x,y)
+  player.x = x
+  player.y = y
+end
+
 function player:movement(dir)
   if dir == "right" then
     self.x = self.x + 32
