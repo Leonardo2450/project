@@ -25,6 +25,7 @@ function controls:modificar()
   
 end]]
 
+--Functions for keybinding in the future
 function controls:funcion_key_e()
 
 end
@@ -47,8 +48,10 @@ function controls:funcion_key_d()
 
 end
 
-function controls:funcion_key_space()
-
+controls.funcion_key_space = function(self)
+  if debug.isEnable() then
+    debug.execEntryFunc()
+  end
 end
 
 function love.keypressed(key)
@@ -62,13 +65,19 @@ function love.keypressed(key)
   elseif key == "down" then
     debug.nextSelection("-")
   elseif key == controls.key_espacio then
-    controls:funcion_key_espacio()
+    
+    controls:funcion_key_space()
+    
+  --Activa el menu de debug
   elseif key == "f1" then
+    
     if debug.isEnable() then
       debug.disable()
     else
       debug.enable()
     end
+    
+  --Close the game (temporal)
   elseif key == "escape" then
     love.event.quit()
   end

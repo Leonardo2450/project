@@ -12,14 +12,14 @@ local menu = {
   w = 250,
   h = 400,
   entries = {
-    {{txt = "GOTO MAP/CAMERA MENU"},{txt = "GOTO ENTITIES MENU"},{txt = "ENABLE DEBUG MESSAGES"}},
+    {{txt = "GOTO MAP/CAMERA MENU", func = function() debug.changeState("debugMessages") end },{txt = "GOTO ENTITIES MENU", func = function() debug.changeState("debugMessages") end},{txt = "ENABLE DEBUG MESSAGES", func = function() debug.changeState("debugMessages") end}},
     {{txt = "/na"},{txt = "na/"},{txt = "n/a"}},
   },
   maintext = {"DEBUG - MAIN MENU","DEBUG - MAP/CAMERA","DEBUG - ENTITIES"}
 }
 
 function debug.message(text)
-  if debug.MessagesAreEnable() then
+  if debug.FeatureIsEnable("debugMessages") then
     print("[DEBUG]"..text)
   end
 end
@@ -35,7 +35,13 @@ function debug.nextSelection(opt)
   end
 end
 
---Disable or enable debug mode
+--Llama a la funciones de las entradas del menu
+function debug.execEntryFunc()
+  menu.entries[ seleccion[1] ][ seleccion[2] ].func()
+  debug.message("Se ha activado/desactivado la funcion: "..menu.entries[ seleccion[1] ][ seleccion[2] ].txt)
+end
+
+--Activa o desactiva el modo debug
 function debug.enable()
   debugOptions.debugMode = true
 end
@@ -44,22 +50,29 @@ function debug.disable()
   debugOptions.debugMode = false
 end
 
---Checks for debug options
+--Activa o desactiva opciones de debug
+function debug.changeState(option)
+  if debugOptions[option] == true then
+    debugOptions[option] = false
+  else
+    debugOptions[option] = true
+  end
+end
+
+--Verifica si el debug mode esta activo
 function debug.isEnable()
   return debugOptions.debugMode
 end
 
-function debug.MessagesAreEnable()
-  return debugOptions.debugMessages
+--Verifica las opciones de debug
+function debug.FeatureIsEnable(option)
+  return debugOptions[option]
 end
 
-function debug.MapTilesIsEnable()
-  return debugOptions.debugMapTiles
-end
-
---Draw the debug menu
+--Dibuja el menu de debug
 function debug.draw()
-  if debug.isEnable() then
+  
+  local function drawmenu()
     love.graphics.setColor(0,0,100/255)
     love.graphics.rectangle("fill",50,50,250,400)
     love.graphics.setColor(1,1,1)
@@ -71,6 +84,10 @@ function debug.draw()
         love.graphics.print(menu.entries[ seleccion[1] ][ i ].txt,menu.x,menu.y+25*i)
       end
     end
+  end
+  
+  if debug.isEnable() then
+    drawmenu()
   end
 end
 

@@ -9,12 +9,16 @@ local map = {}
 local mapSize = 0
 local mapScale = 2
 
---TODO:Carga un mapa
+--TODO: Load a map
 function map_loader.loadMap(archivo)
   map = require(archivo)
+  
+  --
+  
+  
 end
 
---Crea un nuevo tileset y lo guarda
+--Create a new tileset and save it
 function map_loader.loadTileSet(img,size, name)
   local spriteSheet = love.graphics.newImage("tiles/"..img)
   local x = 0
@@ -83,7 +87,7 @@ function map_loader.drawMap()
       end
       
       love.graphics.draw(img,quad,0+((k.size*2)*l),0+((k.size*2)*i),0,2,2)
-      if debug.MapTilesIsEnable() then
+      if debug.FeatureIsEnable("debugMapTiles") then
         love.graphics.rectangle("line",0+((k.size*2)*l),0+((k.size*2)*i),k.size*2,k.size*2)
         love.graphics.print(l.."|"..i,0+((k.size*2)*l),0+((k.size*2)*i))
       end

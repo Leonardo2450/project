@@ -5,7 +5,7 @@ local player = require("player")
 local controls = require("controls")
 local rs = require("resolution_solution")
 
---Resolution solution setup
+--Inicia Resolution solution
 rs.setGame(800, 600)
 rs.scaleMode = 1
 
