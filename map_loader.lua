@@ -1,12 +1,13 @@
 local camera = require("camera")
 local debug = require("debug_menu")
+local player = require("player")
 
 local map_loader = {}
 
 local tilesets = {}
 local map = {}
 local mapSize = 0
-local mapScale = 1
+local mapScale = 2
 
 --TODO:Carga un mapa
 function map_loader.loadMap(archivo)

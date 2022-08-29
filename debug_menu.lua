@@ -12,10 +12,10 @@ local menu = {
   w = 250,
   h = 400,
   entries = {
-    {{txt = "OWO"},{txt = "iwi"},{txt = "ewe"}},
+    {{txt = "GOTO MAP/CAMERA MENU"},{txt = "GOTO ENTITIES MENU"},{txt = "ENABLE DEBUG MESSAGES"}},
     {{txt = "/na"},{txt = "na/"},{txt = "n/a"}},
   },
-  maintext = {"DEBUG - MAIN MENU","",""}
+  maintext = {"DEBUG - MAIN MENU","DEBUG - MAP/CAMERA","DEBUG - ENTITIES"}
 }
 
 function debug.message(text)
@@ -63,7 +63,7 @@ function debug.draw()
     love.graphics.setColor(0,0,100/255)
     love.graphics.rectangle("fill",50,50,250,400)
     love.graphics.setColor(1,1,1)
-    love.graphics.print(menu.maintext[ seleccion[1] ],menu.x,menu.y)
+    love.graphics.print(menu.maintext[ seleccion[1] ],menu.x,menu.y,0,2,2)
     for i=1,#menu.entries[ seleccion[1] ] do
       if i == seleccion[2] then
         love.graphics.print("[ "..menu.entries[ seleccion[1] ][ i ].txt.." ]",menu.x,menu.y+25*i)
