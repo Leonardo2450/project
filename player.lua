@@ -6,10 +6,17 @@ player.w = 32
 player.spr = love.graphics.newImage("spr/player.png")
 player.view = "up"
 
+--Dibuja al jugador
 function player:draw()
   love.graphics.draw(self.spr,self.x,self.y,0,2,2)
 end
 
+--Permite interactuar con los tiles del mapa
+function  player:action( ... )
+  -- body
+end
+
+--Teletransporta el jugador a las coordenadas
 function player:teleport(x,y)
   player.x = x
   player.y = y

@@ -9,16 +9,29 @@ local map = {}
 local mapSize = 0
 local mapScale = 2
 
---TODO: Load a map
+--Carga el mapa
 function map_loader.loadMap(archivo)
   map = require(archivo)
   
-  --
-  
+  --TODO: Lista de tiles especiales. se podria crear una funcion especial
+  for i,v in pairs(map) do
+    for l,k in pairs(v) do
+
+      --Spawn del jugador
+      if k.PlayerSpawn ~= nil then 
+        player:teleport(32*l,32*i)
+      end
+      
+      --Verifica si es colisionable
+      if k.isColliable ~= nil then
+
+      end
+    end
+  end
   
 end
 
---Create a new tileset and save it
+--Crea un nuevo tileset y lo guarda
 function map_loader.loadTileSet(img,size, name)
   local spriteSheet = love.graphics.newImage("tiles/"..img)
   local x = 0
@@ -35,6 +48,7 @@ function map_loader.loadTileSet(img,size, name)
   table.insert(tilesets,{tiles = tileSet,tileSheet = spriteSheet,size = size})
 end
 
+--Actualiza el mapa
 function map_loader.update()
   print(#map)
 end
@@ -51,6 +65,7 @@ function map_loader.newMap(size)
     table.insert(map,x)
   end
   
+  --TODO: añadir opcione en el menu de debug
   for i,v in pairs(map) do
     for l,k in pairs(v) do
       --print(l..": "..k.spr)

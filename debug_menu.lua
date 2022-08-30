@@ -1,5 +1,5 @@
 local debug = {}
-local seleccion = {1,1}
+local seleccion = {1,1} --Menu | opcion
 local debugOptions = {
   debugMode = false,
   debugMessages = false,
@@ -12,8 +12,9 @@ local menu = {
   w = 250,
   h = 400,
   entries = {
-    {{txt = "GOTO MAP/CAMERA MENU", func = function() debug.changeState("debugMessages") end },{txt = "GOTO ENTITIES MENU", func = function() debug.changeState("debugMessages") end},{txt = "ENABLE DEBUG MESSAGES", func = function() debug.changeState("debugMessages") end}},
-    {{txt = "/na"},{txt = "na/"},{txt = "n/a"}},
+    {{txt = "GOTO MAP/CAMERA MENU", func = function() debug.nextMenu(2) end},{txt = "GOTO ENTITIES MENU", func = function() debug.nextMenu(3) end},{txt = "ENABLE DEBUG MESSAGES", func = function() debug.changeState("debugMessages") end}},
+    {{txt = "SHOW GRID"},{txt = "SHOW TILE ATTRIBUTES"},{txt = "CREATE A NEW MAP"},{txt = "EDIT MAP"},{txt = "LOAD MAP"},{txt = "SAVE MAP"}},
+    {{txt = "SHOW COORDS"},{txt = "SHOW LIFE"},{txt = "SHOW ATTRIBUTES"}},
   },
   maintext = {"DEBUG - MAIN MENU","DEBUG - MAP/CAMERA","DEBUG - ENTITIES"}
 }
@@ -26,7 +27,7 @@ end
 
 function debug.nextSelection(opt)
   if debug.isEnable() then
-    debug.message("SELECCION:: "..seleccion[2])
+    debug.message("Seleccion actual: "..seleccion[2])
     if opt == "+" and seleccion[2] ~= 1 then
       seleccion[2] = seleccion[2] - 1
     elseif opt == "-" and seleccion[2] ~= #menu.entries[ seleccion[1] ] then
@@ -35,15 +36,26 @@ function debug.nextSelection(opt)
   end
 end
 
+function debug.nextMenu(menu)
+  debug.message("Pasando al sub-menu: "..seleccion[2])
+  seleccion[1] = menu
+end
+
 --Llama a la funciones de las entradas del menu
 function debug.execEntryFunc()
-  menu.entries[ seleccion[1] ][ seleccion[2] ].func()
-  debug.message("Se ha activado/desactivado la funcion: "..menu.entries[ seleccion[1] ][ seleccion[2] ].txt)
+  if menu.entries[ seleccion[1] ][ seleccion[2] ].func then
+    menu.entries[ seleccion[1] ][ seleccion[2] ].func()
+    debug.message("Se ha activado/desactivado la funcion: "..menu.entries[ seleccion[1] ][ seleccion[2] ].txt)
+  else
+    debug.message("[ERROR]NO existe la funciona que desea activar/desactivar")
+  end
+  
 end
 
 --Activa o desactiva el modo debug
 function debug.enable()
   debugOptions.debugMode = true
+  debug.nextMenu(1)
 end
 
 function debug.disable()
