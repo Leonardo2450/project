@@ -101,8 +101,11 @@ function map_loader.drawMap()
         love.graphics.setColor(1,1,1)
       end
       
+      --Textura del tile
       love.graphics.draw(img,quad,0+((k.size*2)*l),0+((k.size*2)*i),0,2,2)
-      if debug.FeatureIsEnable("debugMapTiles") then
+      
+      --Muestra la cuadricula
+      if debug.FeatureIsEnable("debugGrid") then
         love.graphics.rectangle("line",0+((k.size*2)*l),0+((k.size*2)*i),k.size*2,k.size*2)
         love.graphics.print(l.."|"..i,0+((k.size*2)*l),0+((k.size*2)*i))
       end

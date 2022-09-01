@@ -3,7 +3,8 @@ local seleccion = {1,1} --Menu | opcion
 local debugOptions = {
   debugMode = false,
   debugMessages = false,
-  debugMapTiles = false
+  debugMapTiles = false,
+  debugGrid = false
 }
 
 local menu = {
@@ -13,7 +14,7 @@ local menu = {
   h = 400,
   entries = {
     {{txt = "GOTO MAP/CAMERA MENU", func = function() debug.nextMenu(2) end},{txt = "GOTO ENTITIES MENU", func = function() debug.nextMenu(3) end},{txt = "ENABLE DEBUG MESSAGES", func = function() debug.changeState("debugMessages") end}},
-    {{txt = "SHOW GRID"},{txt = "SHOW TILE ATTRIBUTES"},{txt = "CREATE A NEW MAP"},{txt = "EDIT MAP"},{txt = "LOAD MAP"},{txt = "SAVE MAP"}},
+    {{txt = "SHOW GRID", func = function() debug.changeState("debugGrid") end},{txt = "SHOW TILE ATTRIBUTES"},{txt = "CREATE A NEW MAP"},{txt = "EDIT MAP"},{txt = "LOAD MAP"},{txt = "SAVE MAP"}},
     {{txt = "SHOW COORDS"},{txt = "SHOW LIFE"},{txt = "SHOW ATTRIBUTES"}},
   },
   maintext = {"DEBUG - MAIN MENU","DEBUG - MAP/CAMERA","DEBUG - ENTITIES"}

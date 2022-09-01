@@ -12,8 +12,12 @@ function player:draw()
 end
 
 --Permite interactuar con los tiles del mapa
-function  player:action( ... )
-  -- body
+function player:action( ... )
+  
+end
+
+function player:getCoords()
+  return self.x, self.y
 end
 
 --Teletransporta el jugador a las coordenadas

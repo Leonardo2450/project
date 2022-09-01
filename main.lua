@@ -3,6 +3,7 @@ local map_manager = require("map_loader")
 local debug = require("debug_menu")
 local player = require("player")
 local controls = require("controls")
+local camera = require("camera")
 local rs = require("resolution_solution")
 
 --Inicia Resolution solution
@@ -17,15 +18,23 @@ function love.load()
 end
 
 function love.update(dt)
+  local x,y = player:getCoords()
+  local w,h = rs.getGame()
+  x = x -(w/2) +16
+  y = y - (h/2) +16
+  
   rs.update()
+  camera:setPosition(x,y)
 end
 
 function love.draw()
   rs.start()
+  camera:set()
   love.graphics.setBackgroundColor(0,0,1)
   map_manager.drawMap()
-  debug.draw()
   player:draw()
+  camera:unset()
+  debug.draw()
   rs.stop()
   --map_manager.TileSets()
 end
