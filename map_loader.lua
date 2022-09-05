@@ -8,6 +8,9 @@ local tilesets = {}
 local map = {}
 local mapSize = 0
 local mapScale = 2
+local current_tool = 1
+
+local tools = {"Pincel","Borrador","Propiedades"}
 
 --Carga el mapa
 function map_loader.loadMap(archivo)
@@ -113,13 +116,18 @@ function map_loader.drawMap()
   end
 end
 
-
 --Muestra la paleta de tiles
 function map_loader.TileSets()
   for i,v in pairs(tilesets) do
     for l,k in pairs(v.tiles) do
       love.graphics.draw(v.tileSheet,k,0+((v.size*2)*(l-1)),0,0,2,2)
     end
+  end
+end
+
+function  map_loader.editMap( ... )
+  if tools[current_tool] == tools[1] then
+    print("EDITANDO")
   end
 end
 
