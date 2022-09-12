@@ -50,6 +50,17 @@ end
 function map_loader.update()
   --print(#map)
     print(map_loader.getAttr(player.x,player.y,player.w,player.h, "IsColliable"))
+  if map_loader.getAttr(player.x,player.y,player.w,player.h, "IsColliable") then
+    if love.keyboard.isDown("right") then
+      player.x = player.x - 32
+    elseif love.keyboard.isDown("left") then
+      player.x = player.x + 32
+    elseif love.keyboard.isDown("down") then
+      player.y = player.y - 32
+    elseif love.keyboard.isDown("up") then
+      player.y = player.y + 32
+    end
+  end
 end
 
 function  map_loader.getAttr(x,y,w,h, attr)
