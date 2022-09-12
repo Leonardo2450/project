@@ -23,6 +23,7 @@ function love.update(dt)
   x = x -(w/2) +16
   y = y - (h/2) +16
   
+  map_manager.update()
   rs.update()
   camera:setPosition(x,y)
 end

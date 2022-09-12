@@ -24,11 +24,6 @@ function map_loader.loadMap(archivo)
       if k.PlayerSpawn ~= nil then 
         player:teleport(32*l,32*i)
       end
-      
-      --Verifica si es colisionable
-      if k.isColliable ~= nil then
-
-      end
     end
   end
   
@@ -53,7 +48,18 @@ end
 
 --Actualiza el mapa
 function map_loader.update()
-  print(#map)
+  --print(#map)
+    print(map_loader.getAttr(player.x,player.y,player.w,player.h, "IsColliable"))
+end
+
+function  map_loader.getAttr(x,y,w,h, attr)
+  for i,v in pairs(map) do
+    for l,k in pairs(v) do
+      if CheckCollision(x,y,w,h, i*32,l*32,32,32) then
+        return k[attr]
+      end
+    end
+  end
 end
 
 --Crea un nuevo mapa
@@ -161,6 +167,13 @@ function map_loader.saveMap(archivo)
     end
   end
   love.filesystem.append(archivo,"}")
+end
+
+function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
+  return x1 < x2+w2 and
+         x2 < x1+w1 and
+         y1 < y2+h2 and
+         y2 < y1+h1
 end
 
 return map_loader
