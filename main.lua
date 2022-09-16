@@ -18,7 +18,8 @@ function love.load()
 end
 
 function love.update(dt)
-  local x,y = player:getCoords()
+  player:update_spr(dt)
+  local x,y = player:getSprCoords()
   local w,h = rs.getGame()
   x = x -(w/2) +16
   y = y - (h/2) +16
